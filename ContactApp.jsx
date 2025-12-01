@@ -108,7 +108,7 @@ function ContactSection() {
                                 <div>
                                     <p className="text-sm font-medium text-gray-500 uppercase mb-1">E-Mail</p>
                                     <a href="mailto:anna.schmidt@example.com" className="text-purple-600 hover:text-purple-700 transition font-semibold">
-                                        anna.schmidt@example.com
+                                        a.p
                                     </a>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@ function ContactSection() {
                                 <div>
                                     <p className="text-sm font-medium text-gray-500 uppercase mb-1">Telefon</p>
                                     <a href="tel:+4989123456789" className="text-purple-600 hover:text-purple-700 transition font-semibold">
-                                        +49 89 123 456 789
+                                        +4
                                     </a>
                                 </div>
                             </div>
