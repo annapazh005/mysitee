@@ -10,7 +10,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            /* NEUER SANFTER FARBVERLAUF: Rosa, Orange, Gelb */
+            /* Hintergrund: Zieht bis nach oben (simuliert den Rosa-Orange-Verlauf) */
             background: linear-gradient(135deg, #fce4ec 0%, #ffe0b2 50%, #fffde7 100%); 
             color: #333;
             min-height: 100vh;
@@ -18,67 +18,15 @@
             flex-direction: column;
         }
 
-        /* Header / Navigation */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 50px;
-            /* Glassmorphism-Effekt und Box-Shadow */
-            background-color: rgba(255, 255, 255, 0.8); 
-            backdrop-filter: blur(5px); 
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
+        /* NEU: Absolut positioniertes Logo oben links */
+        .top-logo {
+            position: absolute;
+            top: 30px; /* Abstand oben */
+            left: 50px; /* Abstand links */
             font-size: 1.5em;
             font-weight: bold;
-            color: #000;
-        }
-
-        .nav ul {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav ul li {
-            margin-left: 30px;
-        }
-
-        .nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            padding-bottom: 5px;
-            transition: border-bottom 0.3s;
-        }
-
-        .nav ul li a:hover {
-            border-bottom: 2px solid #000;
-        }
-
-        /* Aktiver Link (Startseite) - Permanent, wie im Bild */
-        .nav ul li .active {
-            border-bottom: 2px solid #000; 
-            font-weight: bold;
-        }
-
-        .contact-button {
-            background-color: #333;
-            color: #fff;
-            padding: 8px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s;
-        }
-
-        .contact-button:hover {
-            background-color: #555;
+            color: #333; /* Dunkle Farbe, um auf dem hellen Hintergrund sichtbar zu sein */
+            z-index: 10;
         }
 
         /* Main Content */
@@ -107,6 +55,7 @@
             line-height: 1;
         }
 
+        /* Kategorien unten als Navigationslinks */
         .categories {
             margin-top: 40px;
             display: flex;
@@ -152,14 +101,9 @@
         
         /* Responsive Anpassungen */
         @media (max-width: 768px) {
-            .header {
-                padding: 15px 20px;
-            }
-            .nav {
-                display: none; 
-            }
-            .contact-button {
-                padding: 6px 15px;
+            .top-logo {
+                top: 20px;
+                left: 20px;
             }
             .title {
                 font-size: 4em;
@@ -167,37 +111,28 @@
             .greeting {
                 font-size: 1.2em;
             }
+            .categories {
+                flex-direction: column; /* Buttons auf Mobilgeräten stapeln */
+            }
         }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="logo">
-            AP
-        </div>
-        <nav class="nav">
-            <ul>
-                <!-- Verknüpfung der Links mit den erstellten Dateien -->
-                <li><a href="index.html" class="active">Startseite</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="leistungen.html">Leistungen</a></li>
-                <li><a href="uebermich.html">Über Mich</a></li>
-            </ul>
-        </nav>
-        <a href="mailto:hallo@annapazhyvilka.de" class="contact-button">Kontakt</a>
-    </header>
+    <!-- NEUES AP-LOGO OBEN LINKS, liegt über dem Hintergrund -->
+    <div class="top-logo">AP</div>
 
+    <!-- HAUPTINHALT -->
     <main class="main-content">
         <p class="greeting">Anna Pazhyvilka</p>
         <h1 class="title">PORTFOLIO</h1>
 
         <div class="categories">
-            <!-- Kategorien verknüpfen zur Portfolio-Seite -->
-            <a href="portfolio.html" class="category-link">Social Media</a>
-            <a href="portfolio.html" class="category-link">Advertising</a>
-            <a href="portfolio.html" class="category-link">Digital Art</a>
-            <a href="portfolio.html" class="category-link">Photo Manipulation</a>
+            <!-- Buttons als Hauptnavigation, wie gewünscht -->
+            <a href="portfolio.html" class="category-link">Portfolio</a>
+            <a href="leistungen.html" class="category-link">Leistungen</a>
+            <a href="uebermich.html" class="category-link">Über Mich</a>
+            <a href="mailto:hallo@annapazhyvilka.de" class="category-link">Kontakt</a>
         </div>
     </main>
 
