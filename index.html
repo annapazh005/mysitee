@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anna Pazhyvilka Photography - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    
     <style>
         /* Grundlegendes Layout */
         body {
@@ -93,43 +95,50 @@
         .hero-section {
             width: 100%;
             height: 60vh; 
-            /* NEU: Ermöglicht die absolute Positionierung der Elemente */
             position: relative; 
             display: block;
             text-align: left;
             padding: 0; 
-            /* Rosa-Orange-Verlauf als Hintergrund */
             background: linear-gradient(135deg, #fce4ec 0%, #ffe0b2 50%, #fb923c 100%); 
         }
 
-        /* 💡 Typografie im Hauptbereich - WEISS & DÜNNER 💡 */
+        /* 💡 Typografie im Hauptbereich - Anna Pazhyvilka (Größer, Monospace, Unter dem Titel) 💡 */
         .greeting {
-            font-size: 1.5em;
+            font-size: 2em; 
+            font-family: 'Roboto Mono', monospace; /* Neuer Font */
             color: white; 
-            font-weight: 300; 
+            font-weight: 400; 
             letter-spacing: 0.5px;
-            /* NEU: Positionierung links unten */
+            
+            /* Positionierung direkt unter dem Titel, linksbündig zur Mitte des Titels */
             position: absolute;
-            bottom: 50px; 
-            left: 50px;
+            top: 50%; 
+            left: 50%; 
+            /* Verschiebt zur Mitte des Titels (-50%) und dann nach unten (+50% der eigenen Höhe + 50px Abstand) */
+            transform: translate(-50%, calc(50% + 50px)); 
             margin: 0;
-            z-index: 1;
+            z-index: 2;
+            text-align: left;
+            padding-left: 0; /* Stellt sicher, dass es linksbündig startet */
+            width: auto; /* Wichtig, damit die Zentrierung korrekt ist */
         }
 
         /* 💡 PORTFOLIO TITEL - EXTREM FETT & WEISS 💡 */
         .title {
-            font-size: 8em; /* Vergrößert */
+            font-size: 8em; 
             font-weight: 900; 
             margin: 0;
-            letter-spacing: -6px; /* Enge */
+            letter-spacing: -6px; 
             color: white; 
             line-height: 1;
-            /* NEU: Zentriert in der Mitte des Hero-Bereichs */
+            
+            /* Zentriert in der Mitte des Hero-Bereichs */
             position: absolute;
             top: 50%; 
             left: 50%; 
-            transform: translate(-50%, -50%); /* Exakte Zentrierung */
+            transform: translate(-50%, -50%); 
             z-index: 1;
+            white-space: nowrap; /* Verhindert Zeilenumbruch */
         }
 
         /* 💡 NEU: Fußtext Sektion (wird in ein Grid umgewandelt) 💡 */
@@ -143,7 +152,7 @@
         /* 💡 BRAND GUIDELINES STIL (Überschrift links, Text rechts) 💡 */
         .content-grid {
             display: grid;
-            grid-template-columns: 1fr 2fr; /* 1 Teil für Überschrift, 2 Teile für Text */
+            grid-template-columns: 1fr 2fr; 
             gap: 40px;
             align-items: flex-start;
         }
@@ -158,7 +167,6 @@
         }
 
         .main-footer-text-wrapper {
-            /* Simuliert die Position unten rechts */
             position: absolute;
             bottom: 50px;
             right: 50px;
@@ -188,10 +196,10 @@
                 font-size: 4em; 
                 letter-spacing: -2px;
             }
+            /* Anpassung für Anna Pazhyvilka auf Mobilgeräten */
             .greeting {
-                bottom: 20px;
-                left: 20px;
-                font-size: 1em; 
+                font-size: 1.2em;
+                transform: translate(-50%, calc(50% + 30px)); 
             }
             .below-hero-content {
                 padding: 30px 20px;
