@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anna Pazhyvilka Photography - Portfolio</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
@@ -35,7 +34,6 @@
             justify-content: flex-start; 
             gap: 40px;
             z-index: 20;
-            /* Sorgt dafür, dass die Schrift in der Sidebar etwas feiner wirkt */
             font-weight: 400; 
         }
 
@@ -63,7 +61,7 @@
             display: flex;
             align-items: center;
             font-size: 0.95em; 
-            font-weight: 500; /* Standardgewicht für Lesbarkeit */
+            font-weight: 500; 
             transition: color 0.2s ease;
             text-align: left;
         }
@@ -73,7 +71,7 @@
             font-size: 0.9em;
             color: #a0a0a0; 
             margin-right: 10px;
-            font-weight: 300; /* Sehr dünn, wie im Bild */
+            font-weight: 300; 
         }
 
         .category-link:hover {
@@ -95,12 +93,11 @@
         .hero-section {
             width: 100%;
             height: 60vh; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 50px 20px;
+            /* NEU: Ermöglicht die absolute Positionierung der Elemente */
+            position: relative; 
+            display: block;
+            text-align: left;
+            padding: 0; 
             /* Rosa-Orange-Verlauf als Hintergrund */
             background: linear-gradient(135deg, #fce4ec 0%, #ffe0b2 50%, #fb923c 100%); 
         }
@@ -108,20 +105,31 @@
         /* 💡 Typografie im Hauptbereich - WEISS & DÜNNER 💡 */
         .greeting {
             font-size: 1.5em;
-            margin-bottom: 5px;
             color: white; 
             font-weight: 300; 
             letter-spacing: 0.5px;
+            /* NEU: Positionierung links unten */
+            position: absolute;
+            bottom: 50px; 
+            left: 50px;
+            margin: 0;
+            z-index: 1;
         }
 
         /* 💡 PORTFOLIO TITEL - EXTREM FETT & WEISS 💡 */
         .title {
-            font-size: 6em; 
-            font-weight: 900; /* Sehr fett (Black) */
+            font-size: 8em; /* Vergrößert */
+            font-weight: 900; 
             margin: 0;
-            letter-spacing: -4px; /* Noch engerer Abstand */
+            letter-spacing: -6px; /* Enge */
             color: white; 
             line-height: 1;
+            /* NEU: Zentriert in der Mitte des Hero-Bereichs */
+            position: absolute;
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); /* Exakte Zentrierung */
+            z-index: 1;
         }
 
         /* 💡 NEU: Fußtext Sektion (wird in ein Grid umgewandelt) 💡 */
@@ -141,8 +149,8 @@
         }
         
         .content-grid h2 {
-            font-size: 3.5em; /* Groß und dominant */
-            font-weight: 900; /* Extrem fett */
+            font-size: 3.5em; 
+            font-weight: 900; 
             color: #000;
             margin: 0;
             line-height: 1;
@@ -176,12 +184,17 @@
             .hero-section {
                 height: 40vh;
             }
+            .title {
+                font-size: 4em; 
+                letter-spacing: -2px;
+            }
+            .greeting {
+                bottom: 20px;
+                left: 20px;
+                font-size: 1em; 
+            }
             .below-hero-content {
                 padding: 30px 20px;
-            }
-            .title {
-                font-size: 3.5em; 
-                letter-spacing: -2px;
             }
             .categories {
                 flex-direction: row; 
@@ -189,7 +202,7 @@
                 gap: 10px;
             }
             .content-grid {
-                grid-template-columns: 1fr; /* Stapeln auf Mobilgeräten */
+                grid-template-columns: 1fr; 
                 gap: 20px;
             }
             .content-grid h2 {
@@ -208,49 +221,39 @@
 </head>
 <body>
 
-    <!-- 1. LINKE SIDEBAR (FEST) -->
     <div class="sidebar">
         
-        <!-- Logo AP -->
         <div class="header-section">
             <div class="top-logo">AP</div>
             
-            <!-- Navigation mit Nummern -->
             <nav class="categories">
                 <a href="portfolio.html" class="category-link"><span class="category-number">01</span>Portfolio</a>
                 <a href="leistungen.html" class="category-link"><span class="category-number">02</span>Leistungen</a>
                 <a href="contact_page.html" class="category-link"><span class="category-number">03</span>Über Mich & Kontakt</a>
                 <a href="mailto:hallo@annapazhyvilka.de" class="category-link"><span class="category-number">04</span>E-Mail senden</a>
                 
-                <!-- Zusätzliche Links für den Look im Bild -->
                 <a href="#" class="category-link mt-8"><span class="category-number">05</span>Download Kit</a>
                 <a href="contact_page.html" class="category-link"><span class="category-number">06</span>Kontakt</a>
             </nav>
         </div>
 
-        <!-- Der Footer-Bereich ist nun leer -->
         <div class="footer-section">
-            <!-- Leer, oder nur Copyright -->
-        </div>
+            </div>
 
     </div>
 
-    <!-- 2. HAUPTINHALT -->
     <main class="main-content-wrapper">
         
-        <!-- HERO SECTION: Hintergrundbild-Effekt mit weißem Text -->
         <div class="hero-section">
+            <h1 class="title">PORTFOLIO.</h1>
+            
             <p class="greeting">Anna Pazhyvilka</p>
-            <h1 class="title">PORTFOLIO</h1>
         </div>
         
-        <!-- CONTENT UNTERHALB DES HERO-BILDES (Zweispaltiges Layout) -->
         <div class="below-hero-content">
              <div class="content-grid">
-                 <!-- Linke Spalte: Fette Überschrift (wie "Brand Guidelines") -->
                  <h2>Meine Vision</h2>
                  
-                 <!-- Rechte Spalte: Fließtext -->
                  <div class="space-y-4 text-gray-700 text-lg">
                     <p>
                         Mein Fokus liegt auf der Erfassung minimalistischer und emotionaler Porträts, die die stille Schönheit des Alltags einfangen. Jedes Bild in meinem Portfolio ist das Ergebnis einer tiefen Auseinandersetzung mit Klarheit, Präzision und der menschlichen Verbindung. Ich arbeite daran, visuelle Geschichten zu erzählen, die sowohl zeitlos als auch persönlich sind.
@@ -262,7 +265,6 @@
              </div>
         </div>
         
-        <!-- 💡 PORTFOLIO-TEXT UNTEN RECHTS (ABSOLUT POSITIONIERT) 💡 -->
         <div class="main-footer-text-wrapper">
             Anna Pazhyvilka ist eine Fotografin, die sich auf minimalistische und emotionale Porträts spezialisiert hat.
         </div>
