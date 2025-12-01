@@ -1,1 +1,161 @@
 
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mein Statisches Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Eigene Styles für den Vergrößerungseffekt und das Layout */
+        .image-tile {
+            aspect-ratio: 1 / 1; /* Stellt quadratische Kacheln sicher */
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .image-tile:hover {
+            transform: scale(1.05);
+            /* Schatten in Graustufen */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+        }
+        .detail-panel {
+            /* Start außerhalb des Bildschirms */
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 50;
+        }
+        .detail-panel.open {
+            /* Schiebt in die Ansicht */
+            transform: translateX(0);
+        }
+        /* Styles für die Bildvorschau (wird im Detail-Panel verwendet) */
+        .image-preview-container {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            /* Grauer Hintergrund */
+            background-color: #f3f3f3; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .image-preview {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+
+        // --- STATISCHE DATEN ---
+        // Dies ist die Liste deiner Portfolio-Elemente. Ändere die URLs und Beschreibungen hier!
+        // Platzhalterbilder sind jetzt schwarz-weiß gehalten
+        const portfolioItems = [
+            { id: 1, imageUrl: 'https://placehold.co/400x400/dddddd/000000?text=Bild+01', description: 'Beschreibung für Bild 1: Eine Einführung in mein erstes Projekt.' },
+            { id: 2, imageUrl: 'https://placehold.co/400x400/cccccc/000000?text=Bild+02', description: 'Beschreibung für Bild 2: Dieses Bild zeigt einen kreativen Prozess.' },
+            { id: 3, imageUrl: 'https://placehold.co/400x400/aaaaaa/000000?text=Bild+03', description: 'Beschreibung für Bild 3: Ein toller Tag im Studio.' },
+            
+            { id: 4, imageUrl: 'https://placehold.co/400x400/999999/ffffff?text=Bild+04', description: 'Beschreibung für Bild 4: Eine Skizze aus meiner Frühphase.' },
+            { id: 5, imageUrl: 'https://placehold.co/400x400/777777/ffffff?text=Bild+05', description: 'Beschreibung für Bild 5: Mein Lieblingswerkstück aus diesem Jahr.' },
+            { id: 6, imageUrl: 'https://placehold.co/400x400/555555/ffffff?text=Bild+06', description: 'Beschreibung für Bild 6: Detailansicht eines komplexen Designs.' },
+            
+            { id: 7, imageUrl: 'https://placehold.co/400x400/444444/dddddd?text=Bild+07', description: 'Beschreibung für Bild 7: Inspiration aus der Natur.' },
+            { id: 8, imageUrl: 'https://placehold.co/400x400/333333/cccccc?text=Bild+08', description: 'Beschreibung für Bild 8: Ein Test mit neuen Farben.' },
+            { id: 9, imageUrl: 'https://placehold.co/400x400/222222/aaaaaa?text=Bild+09', description: 'Beschreibung für Bild 9: Abschlussarbeit und Fazit.' }
+        ];
+
+        // Sucht ein Element anhand der ID im statischen Array
+        function getItemById(id) {
+            return portfolioItems.find(item => item.id === parseInt(id));
+        }
+
+        // Öffnet das Detail-Panel
+        window.openDetailPanel = function(id) {
+            const item = getItemById(id);
+            if (!item) return;
+
+            document.getElementById('detail-image').src = item.imageUrl;
+            document.getElementById('detail-description').textContent = item.description;
+            
+            const panel = document.getElementById('detail-panel');
+            panel.classList.add('open');
+        }
+
+        // Schließt das Detail-Panel
+        window.closeDetailPanel = function() {
+            document.getElementById('detail-panel').classList.remove('open');
+        }
+
+        // Rendert das statische Grid beim Laden der Seite
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('portfolio-grid');
+            grid.innerHTML = ''; // Lade-Spinner entfernen
+
+            portfolioItems.forEach(item => {
+                const tile = document.createElement('div');
+                // Hintergrund in hellem Grau, Schatten und Kacheln in Schwarz-Weiß-Tönen
+                tile.className = 'image-tile relative bg-gray-100 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 group';
+                tile.onclick = () => openDetailPanel(item.id);
+                
+                const img = document.createElement('img');
+                img.src = item.imageUrl;
+                img.alt = item.description.substring(0, 50);
+                img.className = 'w-full h-full object-cover rounded-lg transform group-hover:scale-100 transition-transform duration-300';
+                
+                tile.appendChild(img);
+                grid.appendChild(tile);
+            });
+        });
+    </script>
+</head>
+<!-- Body-Hintergrund ist weiß -->
+<body class="bg-white font-sans">
+
+    <!-- Header - Keine Schatten, zentriert, nur PORTFOLIO -->
+    <header class="bg-white p-4 sticky top-0 z-40 flex flex-col items-center">
+        <!-- Text-black für Schwarz, font-extralight für dünne Schrift, tracking-widest für Eleganz -->
+        <h1 class="text-4xl font-extralight tracking-widest uppercase text-black">PORTFOLIO</h1>
+        <!-- Sekundäre Überschrift entfernt -->
+    </header>
+
+    <!-- Portfolio Grid (3x3 Layout auf Desktop) -->
+    <section class="p-6 md:p-8">
+        <!-- Diese Überschrift beibehalten, da sie den Inhalt beschreibt, aber in Schwarz -->
+        <h2 class="text-2xl font-semibold mb-6 text-black">Galerie-Ansicht</h2>
+        <!-- Grid-Layout: 3x3 wird durch die Kombination der Klassen und 9 Elementen erreicht -->
+        <div id="portfolio-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4 sm:gap-6">
+            <!-- Die Kacheln werden hier durch JavaScript eingefügt -->
+        </div>
+    </section>
+
+    <!-- Detail Panel (Schiebt von rechts herein) -->
+    <div id="detail-panel" class="detail-panel fixed top-0 right-0 w-full md:w-1/3 h-full bg-white shadow-2xl p-6 overflow-y-auto">
+        <!-- Kreuz zum Schließen in Schwarz -->
+        <button onclick="closeDetailPanel()" class="absolute top-4 right-4 text-black hover:text-gray-700 text-3xl font-light">&times;</button>
+        <div class="mt-8">
+            <h3 class="text-2xl font-bold text-black mb-4">Details</h3>
+            
+            <!-- Bild für Detail Panel -->
+            <div class="image-preview-container mb-6 shadow-lg">
+                <img id="detail-image" src="" alt="Detailbild" class="image-preview">
+            </div>
+
+            <p class="text-sm font-semibold text-gray-500 uppercase mb-1">Beschreibungstext</p>
+            <div id="detail-description" class="text-black leading-relaxed whitespace-pre-wrap"></div>
+        </div>
+    </div>
+
+</body>
+</html>
