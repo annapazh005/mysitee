@@ -3,138 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anna Pazhyvilka | Portfolio</title>
-    <!-- Tailwind CSS CDN für schnelles, modernes Styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Setzen der Standard-Schriftart auf Inter -->
+    <title>Anna Pazhyvilka Photography - Portfolio</title>
     <style>
+        /* Minimalistisches Styling für die Struktur */
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* NEUER SANFTER FARBVERLAUF: Rosa, Orange, Gelb */
+            background: linear-gradient(135deg, #fce4ec 0%, #ffe0b2 50%, #fffde7 100%); 
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header / Navigation */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            /* Glassmorphism-Effekt und Box-Shadow */
+            background-color: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(5px); 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav ul li {
+            margin-left: 30px;
+        }
+
+        .nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding-bottom: 5px;
+            transition: border-bottom 0.3s;
+        }
+
+        .nav ul li a:hover {
+            border-bottom: 2px solid #000;
+        }
+
+        /* Aktiver Link (Startseite) - Permanent, wie im Bild */
+        .nav ul li .active {
+            border-bottom: 2px solid #000; 
+            font-weight: bold;
+        }
+
+        .contact-button {
+            background-color: #333;
+            color: #fff;
+            padding: 8px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .contact-button:hover {
+            background-color: #555;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .greeting {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .title {
+            font-size: 6em; 
+            font-weight: 800; 
+            margin: 0;
+            letter-spacing: -2px;
+            color: #000;
+            line-height: 1;
+        }
+
+        .categories {
+            margin-top: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .category-link {
+            text-decoration: none;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s, border-color 0.3s;
+            font-size: 0.9em;
+            background-color: white; /* Weiße Füllung für die Buttons */
+        }
+
+        .category-link:hover {
+            background-color: #f0f0f0;
+            border-color: #333;
+        }
+
+        .category-link::before {
+            content: '↗'; /* Pfeil-Symbol */
+            margin-right: 5px;
+            font-size: 1.1em;
+            line-height: 1;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.8em;
+            width: 100%;
+        }
+        
+        /* Responsive Anpassungen */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            .nav {
+                display: none; 
+            }
+            .contact-button {
+                padding: 6px 15px;
+            }
+            .title {
+                font-size: 4em;
+            }
+            .greeting {
+                font-size: 1.2em;
+            }
         }
     </style>
 </head>
-<body class="bg-stone-50 text-gray-900">
+<body>
 
-    <!-- Navigationsleiste (Menü) -->
-    <nav class="sticky top-0 z-50 bg-stone-50 border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Dezentes Logo (Initialen oder Name) -->
-                <div class="flex-shrink-0">
-                    <a href="index.html" class="text-2xl font-light tracking-widest text-stone-800 uppercase">AP</a>
-                </div>
-
-                <!-- Desktop Menü - KEIN dauerhafter Unterstrich mehr (nur noch Hover-Effekt) -->
-                <div class="hidden md:flex space-x-6 items-center">
-                    <a href="index.html" class="text-gray-900 hover:text-stone-800 px-3 py-2 text-sm font-medium transition duration-150 border-b-2 border-transparent hover:border-stone-800">Startseite</a>
-                    <!-- Anpassung: Dauerhafte Linie entfernt, Hover-Linie hinzugefügt -->
-                    <a href="portfolio.html" class="text-gray-900 hover:text-stone-800 px-3 py-2 text-sm font-medium transition duration-150 border-b-2 border-transparent hover:border-stone-800">Portfolio</a>
-                    <a href="leistungen.html" class="text-gray-900 hover:text-stone-800 px-3 py-2 text-sm font-medium transition duration-150 border-b-2 border-transparent hover:border-stone-800">Leistungen</a>
-                    <a href="uebermich.html" class="text-gray-900 hover:text-stone-800 px-3 py-2 text-sm font-medium transition duration-150 border-b-2 border-transparent hover:border-stone-800">Über Mich</a>
-                    <a href="index.html#contact" class="bg-stone-800 text-white hover:bg-stone-900 px-5 py-2 text-sm font-medium transition duration-150 shadow-md">Kontakt</a>
-                </div>
-
-                <!-- Mobiles Menü Button (Funktionalität ist unten enthalten) -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-stone-800 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
+    <header class="header">
+        <div class="logo">
+            AP
         </div>
+        <nav class="nav">
+            <ul>
+                <!-- Verknüpfung der Links mit den erstellten Dateien -->
+                <li><a href="index.html" class="active">Startseite</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="leistungen.html">Leistungen</a></li>
+                <li><a href="uebermich.html">Über Mich</a></li>
+            </ul>
+        </nav>
+        <a href="mailto:hallo@annapazhyvilka.de" class="contact-button">Kontakt</a>
+    </header>
 
-        <!-- Mobiles Menü Inhalt (Hier bleibt die aktive Seite hervorgehoben, da Hover auf Touch-Geräten unzuverlässig ist) -->
-        <div class="md:hidden hidden bg-stone-50 shadow-xl" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html" class="block text-gray-900 hover:bg-stone-100 rounded-md p-2 text-base font-medium transition duration-150">Startseite</a>
-                <a href="portfolio.html" class="block text-gray-900 hover:bg-stone-100 rounded-md p-2 text-base font-medium transition duration-150 bg-stone-100">Portfolio</a>
-                <a href="leistungen.html" class="block text-gray-900 hover:bg-stone-100 rounded-md p-2 text-base font-medium transition duration-150">Leistungen</a>
-                <a href="uebermich.html" class="block text-gray-900 hover:bg-stone-100 rounded-md p-2 text-base font-medium transition duration-150">Über Mich</a>
-                <a href="index.html#contact" class="block bg-stone-800 text-white hover:bg-stone-900 rounded-md p-2 text-base font-medium transition duration-150">Kontakt</a>
-            </div>
+    <main class="main-content">
+        <p class="greeting">Anna Pazhyvilka</p>
+        <h1 class="title">PORTFOLIO</h1>
+
+        <div class="categories">
+            <!-- Kategorien verknüpfen zur Portfolio-Seite -->
+            <a href="portfolio.html" class="category-link">Social Media</a>
+            <a href="portfolio.html" class="category-link">Advertising</a>
+            <a href="portfolio.html" class="category-link">Digital Art</a>
+            <a href="portfolio.html" class="category-link">Photo Manipulation</a>
         </div>
-    </nav>
-
-    <!-- JavaScript für das mobile Menü (muss in jede Seite kopiert werden) -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const button = document.getElementById('mobile-menu-button');
-            const menu = document.getElementById('mobile-menu');
-
-            button.addEventListener('click', () => {
-                const isExpanded = button.getAttribute('aria-expanded') === 'true' || false;
-                button.setAttribute('aria-expanded', !isExpanded);
-                menu.classList.toggle('hidden');
-
-                button.querySelector('svg:nth-child(1)').classList.toggle('hidden');
-                button.querySelector('svg:nth-child(2)').classList.toggle('hidden');
-            });
-        });
-    </script>
-
-    <!-- Sektion 2: Portfolio (Hauptinhalt dieser Seite) -->
-    <main class="mt-0">
-        <section id="portfolio" class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="lg:text-center mb-12">
-                    <h1 class="text-base text-stone-800 font-semibold tracking-widest uppercase">Portfolio</h1>
-                    <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                        Klarheit und Fokus in meinen Arbeiten
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Projekt 1: Porträt -->
-                    <div class="overflow-hidden border border-gray-100 hover:border-stone-300 transition duration-300">
-                        <img class="w-full h-80 object-cover hover:opacity-80 transition duration-300" 
-                             src="https://placehold.co/400x400/3c3c3c/ffffff?text=PORTRAIT" 
-                             alt="Porträt-Aufnahme" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/400x400/94a3b8/ffffff?text=Portfolio+1'">
-                        <div class="p-4 bg-stone-50">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-1">Authentische Porträts</h3>
-                            <p class="text-gray-500 text-sm">Minimalistische Serie</p>
-                            <a href="#" class="mt-2 inline-block text-stone-800 hover:text-stone-900 text-sm font-medium">Anzeigen &rarr;</a>
-                        </div>
-                    </div>
-                    <!-- Projekt 2: Events -->
-                    <div class="overflow-hidden border border-gray-100 hover:border-stone-300 transition duration-300">
-                        <img class="w-full h-80 object-cover hover:opacity-80 transition duration-300" 
-                             src="https://placehold.co/400x400/3c3c3c/ffffff?text=EVENTS" 
-                             alt="Event-Fotografie"
-                             onerror="this.onerror=null;this.src='https://placehold.co/400x400/94a3b8/ffffff?text=Portfolio+2'">
-                        <div class="p-4 bg-stone-50">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-1">Unauffällige Events</h3>
-                            <p class="text-gray-500 text-sm">Dokumentarischer Stil</p>
-                            <a href="#" class="mt-2 inline-block text-stone-800 hover:text-stone-900 text-sm font-medium">Anzeigen &rarr;</a>
-                        </div>
-                    </div>
-                    <!-- Projekt 3: Commercial -->
-                    <div class="overflow-hidden border border-gray-100 hover:border-stone-300 transition duration-300">
-                        <img class="w-full h-80 object-cover hover:opacity-80 transition duration-300" 
-                             src="https://placehold.co/400x400/3c3c3c/ffffff?text=COMMERCIAL" 
-                             alt="Commercial-Aufnahme"
-                             onerror="this.onerror=null;this.src='https://placehold.co/400x400/94a3b8/ffffff?text=Portfolio+3'">
-                        <div class="p-4 bg-stone-50">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-1">Markeninszenierung</h3>
-                            <p class="text-gray-500 text-sm">Produkte in Szene gesetzt</p>
-                            <a href="#" class="mt-2 inline-block text-stone-800 hover:text-stone-900 text-sm font-medium">Anzeigen &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
-    
-    <!-- Footer - Tiefes Anthrazit -->
-    <footer class="bg-gray-900 py-8 mt-0">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
-            <p>&copy; 2025 Anna Pazhyvilka | Fotografie. Minimalistisches Portfolio.</p>
-        </div>
+
+    <footer class="footer">
+        © 2025 Anna Pazhyvilka | Fotografie. Minimalistisches Portfolio.
     </footer>
 
 </body>
