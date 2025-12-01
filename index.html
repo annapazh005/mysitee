@@ -4,141 +4,269 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anna Pazhyvilka Photography - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* Minimalistisches Styling für die Struktur */
+        /* Grundlegendes Layout */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
-            /* Hintergrund: Zieht bis nach oben (simuliert den Rosa-Orange-Verlauf) */
-            background: linear-gradient(135deg, #fce4ec 0%, #ffe0b2 50%, #fffde7 100%); 
-            color: #333;
             min-height: 100vh;
+            display: flex; 
+            flex-direction: row; 
+            background-color: #f7f7f7; 
+            color: #333;
+        }
+
+        /* 💡 Linke Sidebar (Weiß & Statisch) 💡 */
+        .sidebar {
+            width: 300px; 
+            min-width: 250px;
+            background-color: white; 
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03);
+            position: sticky;
+            top: 0;
+            height: 100vh; 
+            padding: 30px;
             display: flex;
             flex-direction: column;
+            justify-content: flex-start; 
+            gap: 40px;
+            z-index: 20;
+            /* Sorgt dafür, dass die Schrift in der Sidebar etwas feiner wirkt */
+            font-weight: 400; 
         }
 
-        /* NEU: Absolut positioniertes Logo oben links */
+        /* 💡 Logo (AP) - Schwarz & Dünn 💡 */
         .top-logo {
-            position: absolute;
-            top: 30px; /* Abstand oben */
-            left: 50px; /* Abstand links */
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #333; /* Dunkle Farbe, um auf dem hellen Hintergrund sichtbar zu sein */
-            z-index: 10;
+            font-size: 1.2em; 
+            font-weight: 500;
+            color: #000; 
+            line-height: 1;
+            margin-bottom: 20px; 
+        }
+        
+        /* Navigation (Links) */
+        .categories {
+            display: flex;
+            flex-direction: column; 
+            gap: 15px; 
+        }
+        
+        /* Stil der Sidebar-Links */
+        .category-link {
+            text-decoration: none;
+            color: #333; 
+            padding: 0; 
+            display: flex;
+            align-items: center;
+            font-size: 0.95em; 
+            font-weight: 500; /* Standardgewicht für Lesbarkeit */
+            transition: color 0.2s ease;
+            text-align: left;
         }
 
-        /* Main Content */
-        .main-content {
+        /* Stil der Nummerierung */
+        .category-number {
+            font-size: 0.9em;
+            color: #a0a0a0; 
+            margin-right: 10px;
+            font-weight: 300; /* Sehr dünn, wie im Bild */
+        }
+
+        .category-link:hover {
+            color: #f43f5e; 
+        }
+        
+        /* Hauptinhalts-Bereich */
+        .main-content-wrapper {
             flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; 
+            align-items: center;
+            padding: 0;
+            position: relative; 
+        }
+
+        /* HERO-SEKTION (Großes Farbfeld) */
+        .hero-section {
+            width: 100%;
+            height: 60vh; 
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 50px 20px;
+            /* Rosa-Orange-Verlauf als Hintergrund */
+            background: linear-gradient(135deg, #fce4ec 0%, #ffe0b2 50%, #fb923c 100%); 
         }
 
+        /* 💡 Typografie im Hauptbereich - WEISS & DÜNNER 💡 */
         .greeting {
             font-size: 1.5em;
-            margin-bottom: 10px;
-            color: #000;
+            margin-bottom: 5px;
+            color: white; 
+            font-weight: 300; 
+            letter-spacing: 0.5px;
         }
 
+        /* 💡 PORTFOLIO TITEL - EXTREM FETT & WEISS 💡 */
         .title {
             font-size: 6em; 
-            font-weight: 800; 
+            font-weight: 900; /* Sehr fett (Black) */
             margin: 0;
-            letter-spacing: -2px;
-            color: #000;
+            letter-spacing: -4px; /* Noch engerer Abstand */
+            color: white; 
             line-height: 1;
         }
 
-        /* Kategorien unten als Navigationslinks */
-        .categories {
-            margin-top: 40px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .category-link {
-            text-decoration: none;
-            color: #333;
-            border: 1px solid #ccc;
-            padding: 10px 20px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            transition: background-color 0.3s, border-color 0.3s;
-            font-size: 0.9em;
-            background-color: white; /* Weiße Füllung für die Buttons */
-        }
-
-        .category-link:hover {
-            background-color: #f0f0f0;
-            border-color: #333;
-        }
-
-        .category-link::before {
-            content: '↗'; /* Pfeil-Symbol */
-            margin-right: 5px;
-            font-size: 1.1em;
-            line-height: 1;
-        }
-
-        /* Footer */
-        .footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 15px;
-            font-size: 0.8em;
+        /* 💡 NEU: Fußtext Sektion (wird in ein Grid umgewandelt) 💡 */
+        .below-hero-content {
             width: 100%;
+            max-width: 1200px;
+            padding: 50px 40px;
+            margin-top: 0;
         }
         
+        /* 💡 BRAND GUIDELINES STIL (Überschrift links, Text rechts) 💡 */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr; /* 1 Teil für Überschrift, 2 Teile für Text */
+            gap: 40px;
+            align-items: flex-start;
+        }
+        
+        .content-grid h2 {
+            font-size: 3.5em; /* Groß und dominant */
+            font-weight: 900; /* Extrem fett */
+            color: #000;
+            margin: 0;
+            line-height: 1;
+            letter-spacing: -2px;
+        }
+
+        .main-footer-text-wrapper {
+            /* Simuliert die Position unten rechts */
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            max-width: 300px;
+            text-align: right;
+            font-size: 0.9em;
+            color: #666;
+            font-weight: 300;
+        }
+
+
         /* Responsive Anpassungen */
         @media (max-width: 768px) {
-            .top-logo {
-                top: 20px;
-                left: 20px;
+            body {
+                flex-direction: column; 
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative; 
+                padding: 20px;
+            }
+            .hero-section {
+                height: 40vh;
+            }
+            .below-hero-content {
+                padding: 30px 20px;
             }
             .title {
-                font-size: 4em;
-            }
-            .greeting {
-                font-size: 1.2em;
+                font-size: 3.5em; 
+                letter-spacing: -2px;
             }
             .categories {
-                flex-direction: column; /* Buttons auf Mobilgeräten stapeln */
+                flex-direction: row; 
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .content-grid {
+                grid-template-columns: 1fr; /* Stapeln auf Mobilgeräten */
+                gap: 20px;
+            }
+            .content-grid h2 {
+                font-size: 2.5em;
+            }
+            .main-footer-text-wrapper {
+                position: relative; 
+                text-align: center;
+                margin-top: 30px;
+                bottom: auto;
+                right: auto;
+                max-width: 100%;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- NEUES AP-LOGO OBEN LINKS, liegt über dem Hintergrund -->
-    <div class="top-logo">AP</div>
+    <!-- 1. LINKE SIDEBAR (FEST) -->
+    <div class="sidebar">
+        
+        <!-- Logo AP -->
+        <div class="header-section">
+            <div class="top-logo">AP</div>
+            
+            <!-- Navigation mit Nummern -->
+            <nav class="categories">
+                <a href="portfolio.html" class="category-link"><span class="category-number">01</span>Portfolio</a>
+                <a href="leistungen.html" class="category-link"><span class="category-number">02</span>Leistungen</a>
+                <a href="contact_page.html" class="category-link"><span class="category-number">03</span>Über Mich & Kontakt</a>
+                <a href="mailto:hallo@annapazhyvilka.de" class="category-link"><span class="category-number">04</span>E-Mail senden</a>
+                
+                <!-- Zusätzliche Links für den Look im Bild -->
+                <a href="#" class="category-link mt-8"><span class="category-number">05</span>Download Kit</a>
+                <a href="contact_page.html" class="category-link"><span class="category-number">06</span>Kontakt</a>
+            </nav>
+        </div>
 
-    <!-- HAUPTINHALT -->
-    <main class="main-content">
-        <p class="greeting">Anna Pazhyvilka</p>
-        <h1 class="title">PORTFOLIO</h1>
+        <!-- Der Footer-Bereich ist nun leer -->
+        <div class="footer-section">
+            <!-- Leer, oder nur Copyright -->
+        </div>
 
-        <div class="categories">
-            <!-- Buttons als Hauptnavigation, wie gewünscht -->
-            <a href="portfolio.html" class="category-link">Portfolio</a>
-            <a href="leistungen.html" class="category-link">Leistungen</a>
-            <a href="ContactApp.html" class="category-link">Über Mich</a>
-            <a href="mailto:hallo@annapazhyvilka.de" class="category-link">Kontakt</a>
+    </div>
+
+    <!-- 2. HAUPTINHALT -->
+    <main class="main-content-wrapper">
+        
+        <!-- HERO SECTION: Hintergrundbild-Effekt mit weißem Text -->
+        <div class="hero-section">
+            <p class="greeting">Anna Pazhyvilka</p>
+            <h1 class="title">PORTFOLIO</h1>
+        </div>
+        
+        <!-- CONTENT UNTERHALB DES HERO-BILDES (Zweispaltiges Layout) -->
+        <div class="below-hero-content">
+             <div class="content-grid">
+                 <!-- Linke Spalte: Fette Überschrift (wie "Brand Guidelines") -->
+                 <h2>Meine Vision</h2>
+                 
+                 <!-- Rechte Spalte: Fließtext -->
+                 <div class="space-y-4 text-gray-700 text-lg">
+                    <p>
+                        Mein Fokus liegt auf der Erfassung minimalistischer und emotionaler Porträts, die die stille Schönheit des Alltags einfangen. Jedes Bild in meinem Portfolio ist das Ergebnis einer tiefen Auseinandersetzung mit Klarheit, Präzision und der menschlichen Verbindung. Ich arbeite daran, visuelle Geschichten zu erzählen, die sowohl zeitlos als auch persönlich sind.
+                    </p>
+                    <p>
+                        Die Prinzipien, die ich in meiner Fotografie verfolge, spiegeln sich in diesem minimalistischen Design wider: Reduktion auf das Wesentliche, starke Kontraste und ein klarer Fokus.
+                    </p>
+                 </div>
+             </div>
+        </div>
+        
+        <!-- 💡 PORTFOLIO-TEXT UNTEN RECHTS (ABSOLUT POSITIONIERT) 💡 -->
+        <div class="main-footer-text-wrapper">
+            Anna Pazhyvilka ist eine Fotografin, die sich auf minimalistische und emotionale Porträts spezialisiert hat.
         </div>
     </main>
-
-    <footer class="footer">
-        © 2025 Anna Pazhyvilka | Fotografie. Minimalistisches Portfolio.
-    </footer>
 
 </body>
 </html>
