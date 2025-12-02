@@ -1,198 +1,81 @@
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mein Statisches Portfolio</title>
-    <!-- Inter Font von Google Fonts (Dünne Schrift für Eleganz) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* 🎨 HINTERGRUND- UND FILTER-STYLES 🎨 */
-        .aquarell-bg {
-            /* HIER DATEINAMEN ANPASSEN: Das hochgeladene Aquarellbild */
-            background-image: url('aquarell-hintergrund.jpg'); 
-            background-size: cover;
-            background-attachment: fixed;
-            /* Ein leichter Weichzeichner für den Aquarelleffekt auf dem gesamten Body */
-            filter: blur(2px); 
-            min-height: 100vh;
-            /* Sorgt dafür, dass der Hintergrund den gesamten Bildschirm füllt */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
+import React from 'react';
+import { Mail, Phone, Instagram } from 'lucide-react';
 
-        /* Ein Container, der über dem verschwommenen Hintergrund liegt */
-        .content-wrapper {
-            position: relative; /* Wichtig für die Positionierung über dem fixierten Hintergrund */
-            min-height: 100vh;
-            /* Weißer Hintergrund für den Inhalt, um Lesbarkeit zu gewährleisten */
-            background-color: rgba(255, 255, 255, 0.75); /* Leicht erhöhte Transparenz für bessere Lesbarkeit */
-        }
-        
-        /* Eigene Styles für den Vergrößerungseffekt und das Layout */
-        .image-tile {
-            aspect-ratio: 1 / 1; 
-            overflow: hidden;
-            transition: transform 0.3s ease-in-out;
-            cursor: pointer;
-        }
-        .image-tile:hover {
-            transform: scale(1.05);
-            /* Schatten in Graustufen */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            z-index: 10;
-        }
-        .detail-panel {
-            /* Start außerhalb des Bildschirms */
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in-out;
-            z-index: 50;
-            /* Hintergrund des Detail-Panels leicht transparent für den "Frosted-Glass"-Effekt */
-            background-color: rgba(255, 255, 255, 0.9);
-            /* Fügt einen leichten Unschärfe-Effekt auf dem Hintergrund hinzu */
-            backdrop-filter: blur(10px); 
-            -webkit-backdrop-filter: blur(10px);
-        }
-        .detail-panel.open {
-            /* Schiebt in die Ansicht */
-            transform: translateX(0);
-        }
-        /* Styles für die Bildvorschau (wird im Detail-Panel verwendet) */
-        .image-preview-container {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            /* Grauer Hintergrund */
-            background-color: #f3f3f3; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
-        .image-preview {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-        }
-    </style>
-    <script>
-        // Tailwind Konfiguration für die Schriftart 'Inter'
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                },
-            },
-        };
+// Definierte Farben aus dem Design
+const PRIMARY_BG = '#4b3240'; // Dunkelbraun/Lila
+const ACCENT_COLOR = '#adb886'; // Khaki/Grün
 
-        // --- STATISCHE DATEN ---
-        // BITTE HIER IHRE HEIC-Dateien in JPG oder PNG umwandeln!
-        const portfolioItems = [
-            { id: 1, imageUrl: 'Fabir-hiranandani-k7D6UmkHrs4-unsplash.jpg', description: 'Beschreibung für Bild 1: Eine Einführung in mein erstes Projekt.' },
-            { id: 2, imageUrl: 'IMG_6593.jpg', description: 'Beschreibung für Bild 2: Dieses Bild zeigt einen kreativen Prozess.' },
-            { id: 3, imageUrl: 'IMG_6588.jpg', description: 'Beschreibung für Bild 3: Ein toller Tag im Studio.' },
+export default function App() {
+  return (
+    <div 
+      className="min-h-screen flex items-center justify-center px-8 md:px-12 py-20" 
+      style={{ backgroundColor: PRIMARY_BG }}
+    >
+      <div className="max-w-4xl w-full">
+        <div className="space-y-12">
+          
+          {/* Header & Divider */}
+          <div className="space-y-4">
+            {/* Divider Line in Accent Color */}
+            <div className="w-12 h-1 rounded-full mb-4" style={{ backgroundColor: ACCENT_COLOR }}></div>
             
-            { id: 4, imageUrl: 'https://placehold.co/400x400/999999/ffffff?text=Bild+04', description: 'Beschreibung für Bild 4: Eine Skizze aus meiner Frühphase.' },
-            { id: 5, imageUrl: 'https://placehold.co/400x400/777777/ffffff?text=Bild+05', description: 'Beschreibung für Bild 5: Mein Lieblingswerkstück aus diesem Jahr.' },
-            { id: 6, imageUrl: 'https://placehold.co/400x400/555555/ffffff?text=Bild+06', description: 'Beschreibung für Bild 6: Detailansicht eines komplexen Designs.' },
+            <h1 className="text-5xl sm:text-6xl font-semibold text-white">
+              Hello, I'm <span style={{ color: ACCENT_COLOR }}>Your Name</span>
+            </h1>
+          </div>
+
+          {/* Introduction Text Block */}
+          <div className="space-y-6">
+            <p className="text-xl md:text-2xl text-white/90 font-light">
+              A creative professional passionate about crafting beautiful and functional experiences.
+            </p>
             
-            { id: 7, imageUrl: 'https://placehold.co/400x400/444444/dddddd?text=Bild+07', description: 'Beschreibung für Bild 7: Inspiration aus der Natur.' },
-            { id: 8, imageUrl: 'https://placehold.co/400x400/333333/cccccc?text=Bild+08', description: 'Beschreibung für Bild 8: Ein Test mit neuen Farben.' },
-            { id: 9, imageUrl: 'https://placehold.co/400x400/222222/aaaaaa?text=Bild+09', description: 'Beschreibung für Bild 9: Abschlussarbeit und Fazit.' }
-        ];
+            <p className="text-lg text-white/70 leading-relaxed">
+              With a keen eye for design and a love for clean, minimalist aesthetics, 
+              I specialize in creating work that balances form and function. My approach 
+              is simple: listen, create, and refine until every detail is perfect.
+            </p>
 
-        // Sucht ein Element anhand der ID im statischen Array
-        function getItemById(id) {
-            return portfolioItems.find(item => item.id === parseInt(id));
-        }
+            <p className="text-lg text-white/70 leading-relaxed">
+              When I'm not working, you can find me exploring new creative tools, 
+              reading design blogs, or enjoying a good cup of coffee while sketching ideas.
+            </p>
+          </div>
 
-        // Öffnet das Detail-Panel
-        window.openDetailPanel = function(id) {
-            const item = getItemById(id);
-            if (!item) return;
-
-            document.getElementById('detail-image').src = item.imageUrl;
-            document.getElementById('detail-description').textContent = item.description;
+          {/* Contact & Social Links */}
+          <div className="flex flex-col sm:flex-row flex-wrap gap-x-12 gap-y-6 pt-6">
             
-            const panel = document.getElementById('detail-panel');
-            panel.classList.add('open');
-        }
-
-        // Schließt das Detail-Panel
-        window.closeDetailPanel = function() {
-            document.getElementById('detail-panel').classList.remove('open');
-        }
-
-        // Rendert das statische Grid beim Laden der Seite
-        document.addEventListener('DOMContentLoaded', () => {
-            const grid = document.getElementById('portfolio-grid');
-            if (!grid) return;
-
-            grid.innerHTML = ''; // Vorhandenen Inhalt entfernen
-
-            portfolioItems.forEach(item => {
-                const tile = document.createElement('div');
-                // Hintergrund in hellem Grau, Schatten und Kacheln in Schwarz-Weiß-Tönen
-                tile.className = 'image-tile relative bg-gray-200 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 group';
-                tile.onclick = () => openDetailPanel(item.id);
-                
-                const img = document.createElement('img');
-                img.src = item.imageUrl;
-                img.alt = item.description.substring(0, 50);
-                img.className = 'w-full h-full object-cover rounded-lg transform group-hover:scale-100 transition-transform duration-300';
-                
-                tile.appendChild(img);
-                grid.appendChild(tile);
-            });
-        });
-    </script>
-</head>
-<body class="font-sans"> 
-    
-    <!-- 1. FESTER AQUARELL-HINTERGRUND (Verschwommen) -->
-    <div class="aquarell-bg" aria-hidden="true"></div>
-
-    <!-- 2. CONTENT WRAPPER (Halbtransparent Weiß) -->
-    <div class="content-wrapper">
-
-        <!-- Header - Mit leicht transparentem Hintergrund und Schatten -->
-        <header class="bg-white/90 p-4 sticky top-0 z-40 flex flex-col items-center shadow-md"> 
-            <!-- Text-black für Schwarz, font-extralight für dünne Schrift, tracking-widest für Eleganz -->
-            <h1 class="text-4xl font-extralight tracking-widest uppercase text-black">PORTFOLIO</h1>
-        </header>
-
-        <!-- Portfolio Grid (3x3 Layout auf Desktop) -->
-        <section class="p-6 md:p-8">
-            <h2 class="text-2xl font-semibold mb-6 text-black">Galerie-Ansicht</h2>
-            <!-- Grid-Layout: 3x3 wird durch die Kombination der Klassen und 9 Elementen erreicht -->
-            <div id="portfolio-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-4 sm:gap-6">
-                <!-- Die Kacheln werden hier durch JavaScript eingefügt -->
-            </div>
-        </section>
-
-        <!-- Detail Panel (Schiebt von rechts herein) -->
-        <!-- Der Hintergrund wird vom CSS-Stil .detail-panel mit backdrop-filter unscharf gemacht -->
-        <div id="detail-panel" class="detail-panel fixed top-0 right-0 w-full md:w-1/3 h-full shadow-2xl p-6 overflow-y-auto">
-            <!-- Kreuz zum Schließen in Schwarz -->
-            <button onclick="closeDetailPanel()" class="absolute top-4 right-4 text-black hover:text-gray-700 text-3xl font-light">&times;</button>
-            <div class="mt-8">
-                <h3 class="text-2xl font-bold text-black mb-4">Details</h3>
-                
-                <!-- Bild für Detail Panel -->
-                <div class="image-preview-container mb-6 shadow-lg">
-                    <img id="detail-image" src="" alt="Detailbild" class="image-preview">
-                </div>
-
-                <p class="text-sm font-semibold text-gray-700 uppercase mb-1">Beschreibungstext</p>
-                <div id="detail-description" class="text-black leading-relaxed whitespace-pre-wrap"></div>
-            </div>
+            {/* Mail Link */}
+            <a 
+              href="mailto:your.email@example.com" 
+              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+            >
+              <Mail size={20} style={{ color: ACCENT_COLOR }} />
+              <span>your.email@example.com</span>
+            </a>
+            
+            {/* Phone Link */}
+            <a 
+              href="tel:+1234567890" 
+              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+            >
+              <Phone size={20} style={{ color: ACCENT_COLOR }} />
+              <span>+123 456 7890</span>
+            </a>
+            
+            {/* Instagram Link */}
+            <a 
+              href="https://instagram.com/yourusername" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
+            >
+              <Instagram size={20} style={{ color: ACCENT_COLOR }} />
+              <span>@yourusername</span>
+            </a>
+          </div>
         </div>
+      </div>
     </div>
-</body>
-</html>
+  );
+}
