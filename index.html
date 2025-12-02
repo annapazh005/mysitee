@@ -9,75 +9,103 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
+        /* 💡 FARBDEFINITIONEN 💡 */
+        :root {
+            --color-light-accent: #adb886; /* Salbeigrün / Hell */
+            --color-dark-main: #4b3240; /* Tiefes Mauve / Dunkel */
+            --color-text-body: #333333;
+            --color-background-off: #f4f4f0; /* Sehr leichtes Hellbeige */
+        }
+
         /* Grundlegendes Layout */
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            display: flex; 
-            flex-direction: row; 
-            background-color: #f7f7f7; 
-            color: #333;
+            display: flex;
+            flex-direction: row;
+            background-color: var(--color-background-off); /* Neuer Hintergrund */
+            color: var(--color-text-body);
         }
 
         /* 💡 Linke Sidebar (Weiß & Statisch) 💡 */
         .sidebar {
-            width: 250px; 
+            width: 250px;
             min-width: 200px;
-            background-color: white; 
+            background-color: white;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.03);
             position: sticky;
             top: 0;
-            height: 100vh; 
+            height: 100vh;
             padding: 30px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; 
+            justify-content: flex-start;
             gap: 40px;
             z-index: 20;
-            font-weight: 400; 
+            font-weight: 400;
         }
 
-        /* 💡 Logo (AP) - Schwarz & Dünn 💡 */
+        /* 💡 Logo (AP) - Dunkel & Dünn 💡 */
         .top-logo {
-            font-size: 1.5em; 
+            font-size: 1.5em;
             font-weight: 600;
-            color: #000; 
+            color: var(--color-dark-main); /* Dunkle Farbe für das Logo */
             line-height: 1;
-            margin-bottom: 20px; 
+            margin-bottom: 20px;
         }
         
         /* Navigation (Links) */
         .categories {
             display: flex;
-            flex-direction: column; 
-            gap: 15px; 
+            flex-direction: column;
+            gap: 15px;
         }
         
         /* Stil der Sidebar-Links */
         .category-link {
-            text-decoration: none;
-            color: #333; 
-            padding: 0; 
+            text-decoration: none; /* Standard-Unterstrich entfernen */
+            color: var(--color-text-body);
+            padding: 0;
             display: flex;
             align-items: center;
-            font-size: 0.95em; 
-            font-weight: 500; 
+            font-size: 0.95em;
+            font-weight: 500;
             transition: color 0.2s ease;
             text-align: left;
+            position: relative; /* Wichtig für das Pseudo-Element */
+        }
+        
+        /* Animierte Unterstreichung */
+        .category-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -3px; /* Abstand vom Text */
+            left: 0;
+            background-color: var(--color-dark-main);
+            transform: scaleX(0); /* Startet unsichtbar (keine Breite) */
+            transform-origin: bottom left;
+            transition: transform 0.25s ease-out; /* Animationsdauer und -stil */
+        }
+
+        .category-link:hover::after {
+            transform: scaleX(1); /* Wird sichtbar beim Hover */
+            transform-origin: bottom left;
         }
 
         /* Stil der Nummerierung */
         .category-number {
             font-size: 0.8em;
-            color: #a0a0a0; 
+            color: var(--color-dark-main); /* Dunkle Hauptfarbe für die Nummerierung */
             margin-right: 10px;
-            font-weight: 300; 
+            font-weight: 400;
         }
 
         .category-link:hover {
-            color: #f43f5e; 
+            color: var(--color-dark-main); /* Dunkle Farbe beim Hover */
         }
         
         /* Hauptinhalts-Bereich */
@@ -85,108 +113,155 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; 
+            justify-content: flex-start;
             align-items: center;
             padding: 0;
-            position: relative; 
+            position: relative;
         }
 
         /* HERO-SEKTION (Großes Farbfeld) */
         .hero-section {
             width: 100%;
-            height: 60vh; 
-            position: relative; 
+            height: 60vh;
+            position: relative;
             display: block;
             text-align: left;
-            padding: 0; 
-            background: linear-gradient(135deg, #fce4ec 0%, #ffe0b2 50%, #fb923c 100%); 
+            padding: 0;
+            /* Farbverlauf mit den Kundenfarben */
+            background: linear-gradient(135deg, var(--color-light-accent) 0%, #909c73 50%, var(--color-dark-main) 100%);
         }
 
-        /* 💡 Typografie im Hauptbereich - Anna Pazhyvilka (Größer, Monospace, Unter dem Titel) 💡 */
+        /* Typografie im Hauptbereich - Anna Pazhyvilka (Monospace) */
         .greeting {
-            font-size: 2em; 
-            font-family: 'Roboto Mono', monospace; /* Neuer Font */
+            font-size: 2em;
+            font-family: 'Roboto Mono', monospace;
             color: white; 
-            font-weight: 400; 
+            font-weight: 400;
             letter-spacing: 0.5px;
             
-            /* Positionierung direkt unter dem Titel, linksbündig zur Mitte des Titels */
+            /* Positionierung */
             position: absolute;
-            top: 50%; 
-            left: 50%; 
-            /* Verschiebt zur Mitte des Titels (-50%) und dann nach unten (+50% der eigenen Höhe + 50px Abstand) */
-            transform: translate(-50%, calc(50% + 50px)); 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, calc(50% + 50px));
             margin: 0;
             z-index: 2;
             text-align: left;
-            padding-left: 0; /* Stellt sicher, dass es linksbündig startet */
-            width: auto; /* Wichtig, damit die Zentrierung korrekt ist */
+            padding-left: 0; 
+            width: auto; 
         }
 
-        /* 💡 PORTFOLIO TITEL - EXTREM FETT & WEISS 💡 */
+        /* PORTFOLIO TITEL - EXTREM FETT & WEISS */
         .title {
-            font-size: 8em; 
-            font-weight: 900; 
+            font-size: 6em; 
+            font-weight: 900;
             margin: 0;
-            letter-spacing: -6px; 
+            letter-spacing: -6px;
             color: white; 
             line-height: 1;
             
             /* Zentriert in der Mitte des Hero-Bereichs */
             position: absolute;
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 1;
-            white-space: nowrap; /* Verhindert Zeilenumbruch */
+            white-space: nowrap; 
         }
+        
+        /* 💡 NEUE SEKTIONEN FÜR GALERIE START 💡 */
 
-        /* 💡 NEU: Fußtext Sektion (wird in ein Grid umgewandelt) 💡 */
-        .below-hero-content {
+        /* Gallery Selector (Karten) */
+        .gallery-selector {
             width: 100%;
             max-width: 1200px;
             padding: 50px 40px;
-            margin-top: 0;
-        }
-        
-        /* 💡 BRAND GUIDELINES STIL (Überschrift links, Text rechts) 💡 */
-        .content-grid {
             display: grid;
-            grid-template-columns: 1fr 2fr; 
-            gap: 40px;
-            align-items: flex-start;
-        }
-        
-        .content-grid h2 {
-            font-size: 3.5em; 
-            font-weight: 900; 
-            color: #000;
-            margin: 0;
-            line-height: 1;
-            letter-spacing: -2px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
-        .main-footer-text-wrapper {
-            position: absolute;
-            bottom: 50px;
-            right: 50px;
-            max-width: 300px;
-            text-align: right;
+        .gallery-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+            border: 2px solid transparent; 
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Active state using the dark mauve color */
+        .gallery-card.active {
+            background-color: var(--color-background-off);
+            border-color: var(--color-dark-main);
+            transform: translateY(0);
+        }
+
+        .gallery-card h3 {
+            font-size: 1.6em; /* Leicht vergrößert für mehr Fokus */
+            font-weight: 400; /* NEU: Feinerer Font-Weight */
+            color: var(--color-dark-main);
+            margin-bottom: 5px;
+            text-align: center; /* NEU: Zentriert */
+        }
+
+        .gallery-card p {
             font-size: 0.9em;
             color: #666;
-            font-weight: 300;
+            margin-top: 0;
+            text-align: center; /* NEU: Zentriert */
         }
+
+        /* Gallery Content Area (für die Bilder) */
+        .gallery-content {
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 40px 80px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.5s ease, max-height 0.7s ease;
+        }
+        
+        .gallery-content.visible {
+            opacity: 1;
+            max-height: 2000px; /* Groß genug für Bilder */
+            padding-top: 30px; /* Abstand zur Karte */
+        }
+
+        .gallery-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .gallery-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            object-fit: cover;
+            aspect-ratio: 4/3; /* Festes Seitenverhältnis für Platzhalter */
+        }
+
+        /* 💡 NEUE SEKTIONEN FÜR GALERIE ENDE 💡 */
 
 
         /* Responsive Anpassungen */
         @media (max-width: 768px) {
             body {
-                flex-direction: column; 
+                flex-direction: column;
             }
             .sidebar {
                 width: 100%;
                 height: auto;
-                position: relative; 
+                position: relative;
                 padding: 20px;
             }
             .hero-section {
@@ -199,25 +274,22 @@
             /* Anpassung für Anna Pazhyvilka auf Mobilgeräten */
             .greeting {
                 font-size: 1.2em;
-                transform: translate(-50%, calc(50% + 30px)); 
+                transform: translate(-50%, calc(50% + 30px));
             }
-            .below-hero-content {
+            
+            .gallery-selector {
+                grid-template-columns: 1fr;
                 padding: 30px 20px;
             }
-            .categories {
-                flex-direction: row; 
-                flex-wrap: wrap;
-                gap: 10px;
+            .gallery-images {
+                grid-template-columns: 1fr;
             }
-            .content-grid {
-                grid-template-columns: 1fr; 
-                gap: 20px;
+            .gallery-content {
+                 padding: 0 20px 50px;
             }
-            .content-grid h2 {
-                font-size: 2.5em;
-            }
+
             .main-footer-text-wrapper {
-                position: relative; 
+                position: relative;
                 text-align: center;
                 margin-top: 30px;
                 bottom: auto;
@@ -258,24 +330,96 @@
             <p class="greeting">Anna Pazhyvilka</p>
         </div>
         
-        <div class="below-hero-content">
-             <div class="content-grid">
-                 <h2>Meine 
-                     Vision</h2>
-                 
-                 <div class="space-y-4 text-gray-700 text-lg">
-                    <p>
-                        Mein Fokus liegt auf der Erfassung minimalistischer und emotionaler Porträts, die die stille Schönheit des Alltags einfangen. Jedes Bild in meinem Portfolio ist das Ergebnis einer tiefen Auseinandersetzung mit Klarheit, Präzision und der menschlichen Verbindung. Ich arbeite daran, visuelle Geschichten zu erzählen, die sowohl zeitlos als auch persönlich sind.
-                    </p>
-                    <p>
-                        Die Prinzipien, die ich in meiner Fotografie verfolge, spiegeln sich in diesem minimalistischen Design wider: Reduktion auf das Wesentliche, starke Kontraste und ein klarer Fokus.
-                    </p>
-                 </div>
-             </div>
+        <!-- NEUER INTERAKTIVER GALERIE-BEREICH START -->
+        <div class="gallery-selector">
+            
+            <!-- Karte 1: Portraits (Jetzt minimalistischer) -->
+            <div id="card-portraits" class="gallery-card" data-category="portraits">
+                <h3>Portraits</h3>
+                <p>Einfangen von Emotion und Charakter mit Fokus auf Natürlichkeit.</p>
+            </div>
+            
+            <!-- Karte 2: Commercial (Jetzt minimalistischer) -->
+            <div id="card-commercial" class="gallery-card" data-category="commercial">
+                <h3>Commercial</h3>
+                <p>Visuelle Storytelling für Marken und Business-Kunden.</p>
+            </div>
+            
         </div>
+
+        <!-- Inhaltsbereich, der beim Klick gefüllt und sichtbar gemacht wird -->
+        <div id="gallery-content" class="gallery-content">
+            <!-- Inhalt wird per JavaScript eingefügt -->
+        </div>
+        <!-- NEUER INTERAKTIVER GALERIE-BEREICH ENDE -->
         
+        <!-- Platzhalter für den Footer-Text, der normalerweise am Ende der Seite steht -->
+        <div class="main-footer-text-wrapper">
+             &copy; 2025 Anna Pazhyvilka Photography. Alle Rechte vorbehalten.
+        </div>
     
     </main>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.gallery-card');
+            const contentArea = document.getElementById('gallery-content');
+
+            // Datenstruktur für die Galerieinhalte
+            const galleryData = {
+                portraits: {
+                    title: "Ausgewählte Portraits",
+                    images: [
+                        { url: "https://placehold.co/800x600/adb886/4b3240?text=PORTRAIT%201", alt: "Minimalistisches Portrait 1" },
+                        { url: "https://placehold.co/800x600/4b3240/adb886?text=PORTRAIT%202", alt: "Minimalistisches Portrait 2" }
+                    ]
+                },
+                commercial: {
+                    title: "Commercial & Brand Work",
+                    images: [
+                        { url: "https://placehold.co/800x600/4b3240/adb886?text=COMMERCIAL%201", alt: "Markenaufnahme 1" },
+                        { url: "https://placehold.co/800x600/adb886/4b3240?text=COMMERCIAL%202", alt: "Markenaufnahme 2" }
+                    ]
+                }
+            };
+
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    const data = galleryData[category];
+
+                    // 1. Alle Karten auf inaktiv setzen
+                    cards.forEach(c => c.classList.remove('active'));
+
+                    // 2. Aktuelle Karte auf aktiv setzen
+                    this.classList.add('active');
+
+                    // 3. Inhalt generieren
+                    let contentHTML = `
+                        <h3 class="text-3xl font-bold text-gray-800 mb-4">${data.title}</h3>
+                        <div class="gallery-images">
+                            ${data.images.map(img => `
+                                <div>
+                                    <img src="${img.url}" alt="${img.alt}" />
+                                </div>
+                            `).join('')}
+                        </div>
+                        <p class="mt-8 text-sm text-gray-500">
+                           Hinweis: Dies sind Platzhalter-Bilder, die Sie einfach durch Ihre eigenen ersetzen können.
+                        </p>
+                    `;
+
+                    // 4. Inhalt einfügen und sichtbar machen
+                    contentArea.innerHTML = contentHTML;
+                    contentArea.classList.add('visible');
+                    
+                    // Optionale: Scrollen Sie zum Inhalt, wenn er eingeblendet wird
+                    setTimeout(() => {
+                         contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 500);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
