@@ -1,81 +1,34 @@
-import React from 'react';
-import { Mail, Phone, Instagram } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalistisches Profil</title>
+    <!-- Tailwind CSS laden -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons laden -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Definierte Farben */
+        :root {
+            --primary-bg: #4b3240; /* Dunkelbraun/Lila */
+            --accent-color: #adb886; /* Khaki/Grün */
+        }
 
-// Definierte Farben aus dem Design
-const PRIMARY_BG = '#4b3240'; // Dunkelbraun/Lila
-const ACCENT_COLOR = '#adb886'; // Khaki/Grün
+        /* Setze die Standard-Schriftart */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
 
-export default function App() {
-  return (
-    <div 
-      className="min-h-screen flex items-center justify-center px-8 md:px-12 py-20" 
-      style={{ backgroundColor: PRIMARY_BG }}
-    >
-      <div className="max-w-4xl w-full">
-        <div className="space-y-12">
-          
-          {/* Header & Divider */}
-          <div className="space-y-4">
-            {/* Divider Line in Accent Color */}
-            <div className="w-12 h-1 rounded-full mb-4" style={{ backgroundColor: ACCENT_COLOR }}></div>
-            
-            <h1 className="text-5xl sm:text-6xl font-semibold text-white">
-              Hello, I'm <span style={{ color: ACCENT_COLOR }}>Your Name</span>
-            </h1>
-          </div>
+        /* Stil für die Icons (von Lucide) */
+        .lucide-icon {
+            color: var(--accent-color);
+            transition: transform 0.2s;
+        }
 
-          {/* Introduction Text Block */}
-          <div className="space-y-6">
-            <p className="text-xl md:text-2xl text-white/90 font-light">
-              A creative professional passionate about crafting beautiful and functional experiences.
-            </p>
-            
-            <p className="text-lg text-white/70 leading-relaxed">
-              With a keen eye for design and a love for clean, minimalist aesthetics, 
-              I specialize in creating work that balances form and function. My approach 
-              is simple: listen, create, and refine until every detail is perfect.
-            </p>
-
-            <p className="text-lg text-white/70 leading-relaxed">
-              When I'm not working, you can find me exploring new creative tools, 
-              reading design blogs, or enjoying a good cup of coffee while sketching ideas.
-            </p>
-          </div>
-
-          {/* Contact & Social Links */}
-          <div className="flex flex-col sm:flex-row flex-wrap gap-x-12 gap-y-6 pt-6">
-            
-            {/* Mail Link */}
-            <a 
-              href="mailto:your.email@example.com" 
-              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-            >
-              <Mail size={20} style={{ color: ACCENT_COLOR }} />
-              <span>your.email@example.com</span>
-            </a>
-            
-            {/* Phone Link */}
-            <a 
-              href="tel:+1234567890" 
-              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-            >
-              <Phone size={20} style={{ color: ACCENT_COLOR }} />
-              <span>+123 456 7890</span>
-            </a>
-            
-            {/* Instagram Link */}
-            <a 
-              href="https://instagram.com/yourusername" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-white/80 hover:text-white transition-colors"
-            >
-              <Instagram size={20} style={{ color: ACCENT_COLOR }} />
-              <span>@yourusername</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+        .link-item:hover .lucide-icon {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
