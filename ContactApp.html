@@ -1,253 +1,66 @@
+import React from 'react';
+import { Mail, Phone, Instagram } from 'lucide-react';
 
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Über Mich & Kontakt</title>
-    <!-- Inter Font von Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Stellt sicher, dass die Inter-Schriftart im gesamten Dokument verwendet wird */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Definiert eine einfache Animation für die Statusmeldung */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-            animation: fadeIn 0.3s ease-out;
-        }
-    </style>
-</head>
-<body class="bg-gray-50 min-h-screen">
+export default function App() {
+  return (
+    <div className="min-h-screen flex items-center justify-center px-6 py-12" style={{ backgroundColor: '#4b3240' }}>
+      <div className="max-w-3xl w-full">
+        <div className="space-y-8">
+          {/* Header */}
+          <div className="space-y-4">
+            <div className="w-16 h-1 rounded-full" style={{ backgroundColor: '#adb886' }}></div>
+            <h1 className="text-5xl md:text-6xl text-white">
+              Hello, I'm <span style={{ color: '#adb886' }}>Your Name</span>
+            </h1>
+          </div>
 
-    <!-- 1. ÜBER MICH SEKTION (AboutSection) -->
-    <section id="about" class="py-16 md:py-24 px-4 bg-white shadow-inner">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl font-extralight tracking-wider uppercase text-center mb-12 text-gray-900">
-                Über Mich
-            </h2>
+          {/* Introduction */}
+          <div className="space-y-6">
+            <p className="text-xl text-white/90">
+              A creative professional passionate about crafting beautiful and functional experiences.
+            </p>
             
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <!-- Linke Seite: Bild (Platzhalter) -->
-                <div class="flex justify-center">
-                    <!-- Bitte ersetzen Sie diese URL durch Ihr eigenes Profilbild! -->
-                    <img
-                        src="https://placehold.co/400x500/A079BF/ffffff?text=Ihr+Foto" 
-                        alt="Profilbild von Anna Schmidt"
-                        class="w-full max-w-xs md:max-w-sm rounded-3xl shadow-2xl object-cover aspect-[4/5] border-8 border-white transition-transform duration-500 hover:scale-[1.02]"
-                    />
-                </div>
-                
-                <!-- Rechte Seite: Biographie -->
-                <div class="text-gray-700 space-y-6 p-4">
-                    <h3 class="text-3xl font-light text-purple-700 tracking-wide">
-                        Anna Schmidt – Kreative Gestalterin & Entwicklerin
-                    </h3>
-                    <p class="leading-relaxed">
-                        Willkommen auf meinem Portfolio! Ich bin Anna Schmidt, eine leidenschaftliche Entwicklerin und Designerin mit Sitz in München. Mein Fokus liegt darauf, komplexe Ideen in klare, ästhetische und benutzerfreundliche digitale Lösungen zu verwandeln. Ich glaube fest daran, dass die besten Projekte entstehen, wenn Kreativität auf Präzision trifft.
-                    </p>
-                    <p class="leading-relaxed">
-                        In den letzten fünf Jahren habe ich an zahlreichen Projekten gearbeitet, von minimalistischen Webseiten bis hin zu komplexen E-Commerce-Plattformen. Ich liebe es, die Brücke zwischen kreativer Vision und technischer Machbarkeit zu schlagen. Ich bin immer auf der Suche nach neuen Herausforderungen, die es mir ermöglichen, meine Fähigkeiten in den Bereichen UI/UX, Frontend-Entwicklung (React/Angular) und visuelles Storytelling einzusetzen.
-                    </p>
-                    <p class="font-semibold text-gray-800 pt-2">
-                        Lassen Sie uns zusammenarbeiten, um Ihre nächste Idee zum Leben zu erwecken!
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2. KONTAKT SEKTION (ContactSection) -->
-    <section id="contact" class="py-16 md:py-24 px-4 min-h-screen bg-gray-50/50">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-4xl font-extralight tracking-wider uppercase text-center mb-4 text-gray-900">
-                Kontakt
-            </h2>
-            <p class="text-lg text-center text-gray-600 mb-12 max-w-2xl mx-auto font-light">
-                Interessiert an einer Zusammenarbeit? Schreiben Sie mir eine Nachricht!
+            <p className="text-lg text-white/70 leading-relaxed">
+              With a keen eye for design and a love for clean, minimalist aesthetics, 
+              I specialize in creating work that balances form and function. My approach 
+              is simple: listen, create, and refine until every detail is perfect.
             </p>
 
-            <!-- Statusmeldung wird hier eingefügt -->
-            <div id="submission-status" class="mb-8 hidden"></div>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <!-- Contact Info (Linke Spalte) -->
-                <div class="p-6 md:p-8 bg-white rounded-xl shadow-lg border border-gray-100">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-6">Kontaktinformationen</h3>
-                    
-                    <div class="space-y-6">
-                        <!-- E-Mail -->
-                        <div class="flex items-start gap-4">
-                            <div class="p-3 bg-purple-100 rounded-xl flex-shrink-0">
-                                <!-- Mail Icon (Lucide SVG) -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-purple-600"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.83 1.83 0 0 1-2.06 0L2 7"/></svg>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500 uppercase mb-1">E-Mail</p>
-                                <a href="mailto:anna.schmidt@example.com" class="text-purple-600 hover:text-purple-700 transition font-semibold">
-                                    anna.sophie0002@gmail.com
-                                </a>
-                            </div>
-                        </div>
+            <p className="text-lg text-white/70 leading-relaxed">
+              When I'm not working, you can find me exploring new creative tools, 
+              reading design blogs, or enjoying a good cup of coffee while sketching ideas.
+            </p>
+          </div>
 
-                        <!-- Telefon -->
-                        <div class="flex items-start gap-4">
-                            <div class="p-3 bg-purple-100 rounded-xl flex-shrink-0">
-                                <!-- Phone Icon (Lucide SVG) -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-purple-600"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 3.07 2h3a2 2 0 0 1 2 1.74 17 17 0 0 0 .9 7.72 2 2 0 0 1-.45 2.11L8.09 15.7a19.4 19.4 0 0 0 6.54 6.54l1.44-1.39a2 2 0 0 1 2.11-.45 17 17 0 0 0 7.72.9A2 2 0 0 1 22 16.92z"/></svg>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500 uppercase mb-1">Telefon</p>
-                                <a href="tel:+4989123456789" class="text-purple-600 hover:text-purple-700 transition font-semibold">
-                                    01637272818
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- Standort -->
-                        <div class="flex items-start gap-4">
-                            <div class="p-3 bg-purple-100 rounded-xl flex-shrink-0">
-                                <!-- MapPin Icon (Lucide SVG) -->
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 text-purple-600"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            </div>
-                            <div>
-                                <p class="text-sm font-medium text-gray-500 uppercase mb-1">Standort</p>
-                                <p class="text-gray-700 font-semibold">München, Deutschland</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-10 p-6 bg-purple-50 rounded-xl shadow-inner">
-                        <p class="text-gray-700 font-light">
-                            Ich bin offen für spannende Projekte, Freelance-Aufträge und 
-                            Festanstellungen. Lassen Sie uns gemeinsam etwas Großartiges schaffen!
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Contact Form (Rechte Spalte) -->
-                <div class="p-6 md:p-8 bg-white rounded-xl shadow-lg border border-gray-100">
-                    <!-- Formular-ID für JS-Handling -->
-                    <form id="contact-form">
-                        <div class="mb-6">
-                            <label for="name" class="block text-gray-700 font-medium mb-2">
-                                Name
-                            </label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-purple-300/50 focus:border-purple-500 outline-none transition-all duration-200"
-                                placeholder="Ihr Name"
-                            />
-                        </div>
-
-                        <div class="mb-6">
-                            <label for="email" class="block text-gray-700 font-medium mb-2">
-                                E-Mail
-                            </label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-purple-300/50 focus:border-purple-500 outline-none transition-all duration-200"
-                                placeholder="ihre.email@example.com"
-                            />
-                        </div>
-
-                        <div class="mb-8">
-                            <label for="message" class="block text-gray-700 font-medium mb-2">
-                                Nachricht
-                            </label>
-                            <textarea
-                                id="message"
-                                name="message"
-                                required
-                                rows="5"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-purple-300/50 focus:focus:border-purple-500 outline-none transition-all duration-200 resize-none"
-                                placeholder="Ihre Nachricht..."
-                            ></textarea>
-                        </div>
-
-                        <button
-                            type="submit"
-                            id="submit-button"
-                            class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-6 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center justify-center gap-2 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                        >
-                            <!-- Send Icon (Lucide SVG) -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                            <span id="button-text">Nachricht senden</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
+          {/* Contact & Social */}
+          <div className="flex gap-8 pt-8">
+            <a 
+              href="mailto:your.email@example.com" 
+              className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group"
+            >
+              <Mail size={24} style={{ color: '#adb886' }} className="group-hover:scale-110 transition-transform" />
+              <span>your.email@example.com</span>
+            </a>
+            <a 
+              href="tel:+1234567890" 
+              className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group"
+            >
+              <Phone size={24} style={{ color: '#adb886' }} className="group-hover:scale-110 transition-transform" />
+              <span>+123 456 7890</span>
+            </a>
+            <a 
+              href="https://instagram.com/yourusername" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group"
+            >
+              <Instagram size={24} style={{ color: '#adb886' }} className="group-hover:scale-110 transition-transform" />
+              <span>@yourusername</span>
+            </a>
+          </div>
         </div>
+      </div>
+    </div>
+  );
+}
 
-        <!-- Footer -->
-        <div class="mt-20 text-center text-gray-500">
-            <p class="text-sm font-light">© 2024 Anna Schmidt. Alle Rechte vorbehalten.</p>
-        </div>
-    </section>
-
-    <!-- Reine JavaScript Logik -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('contact-form');
-            const statusDiv = document.getElementById('submission-status');
-            const submitButton = document.getElementById('submit-button');
-            const buttonText = document.getElementById('button-text');
-            const inputs = form.querySelectorAll('input, textarea');
-
-            function setSubmissionStatus(message, isSuccess = false) {
-                statusDiv.classList.remove('hidden', 'bg-green-100', 'text-green-700', 'bg-blue-100', 'text-blue-700', 'bg-red-100', 'text-red-700');
-                
-                statusDiv.textContent = message;
-                statusDiv.classList.add('p-4', 'rounded-lg', 'shadow-md', 'text-center', 'font-medium', 'fade-in');
-
-                if (message.includes("gesendet...")) {
-                    statusDiv.classList.add('bg-blue-100', 'text-blue-700');
-                } else if (isSuccess) {
-                    statusDiv.classList.add('bg-green-100', 'text-green-700');
-                } else {
-                    statusDiv.classList.add('bg-red-100', 'text-red-700');
-                }
-            }
-
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                // Deaktiviert den Button und zeigt den Status an
-                submitButton.disabled = true;
-                buttonText.textContent = "Wird gesendet...";
-                setSubmissionStatus("Nachricht wird gesendet...", false);
-
-                // Simulation einer Formular-Übermittlung (1.5 Sekunden Verzögerung)
-                setTimeout(() => {
-                    const successMessage = "Nachricht erfolgreich gesendet! Vielen Dank für Ihr Interesse. (Demo)";
-                    setSubmissionStatus(successMessage, true);
-                    
-                    // Button-Text zurücksetzen und aktivieren
-                    buttonText.textContent = "Nachricht senden";
-                    submitButton.disabled = false;
-
-                    // Formularfelder leeren
-                    inputs.forEach(input => input.value = '');
-
-                    // Statusmeldung nach 5 Sekunden ausblenden
-                    setTimeout(() => {
-                        statusDiv.classList.add('hidden');
-                    }, 5000);
-
-                }, 1500); // 1.5 Sekunden
-            });
-        });
-    </script>
-</body>
-</html>
