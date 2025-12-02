@@ -1,5 +1,84 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    echo("hello");
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalistische Galerie</title>
+    <!-- Tailwind CSS laden -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Definierte Farben (relevant für Platzhalter) */
+        :root {
+            --primary-bg: #4b3240; /* Dunkelbraun/Lila */
+            --accent-color: #adb886; /* Khaki/Grün */
+            --light-bg: #f5f5f5; /* Hellgrau für die Galerie */
+        }
+
+        /* Setze die Standard-Schriftart */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--light-bg); /* Hintergrundfarbe auf das Gallery-Schema setzen */
+        }
+
+        /* Stil für den Hover-Effekt der Galerie */
+        .gallery-image {
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
+<body class="antialiased">
+    
+    <!-- GALERIE SEKTION -->
+    <section class="py-20 px-8">
+        <div class="w-full max-w-5xl mx-auto">
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-gray-800">Galerie & Inspiration</h2>
+            
+            <!-- Hier wird die Bildergalerie per JavaScript eingefügt -->
+            <div id="image-gallery-container" class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Bilder werden hier generiert -->
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-10">
+                Die Bilder stammen von Unsplash und dienen als Platzhalter für Ihre Fotografie.
+            </p>
+        </div>
+    </section>
+    
+    <script>
+        // --- GALERIE GENERIERUNG ---
+        const images = [
+            'https://images.unsplash.com/photo-1544699748-bdfb8b2f3796?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtaW5pbWFsJTIwZ2FsbGVyeXxlbnwxfHx8fDE3NjQ3MTEwMzJ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+            'https://images.unsplash.com/photo-1615184697985-c9bde1b07da7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxhYnN0cmFjdCUyMGFydHxlbnwxfHx8fDE3NjQ2MDIzMDZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+            'https://images.unsplash.com/photo-1617634667039-8e4cb277ab46?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxuYXR1cmUlMjBsYW5kc2NhcGV8ZW58MXx8fHwxNzY0NTg3OTE2fDA&ixlib=rb-4.1.0&q=80&w=1080',
+            'https://images.unsplash.com/photo-1520529890308-f503006340b4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxtaW5pbWFsJTIwYXJjaGl0ZWN0dXJlfGVufDF8fHx8MTc2NDY2MjQyNHww&ixlib=rb-4.1.0&q=80&w=1080',
+            'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxtb2Rlcm4lMjBpbnRlcmlvcnxlbnwxfHx8fDE3NjQ3MTExMDl8MA&ixlib=rb-4.1.0&q=80&w=1080',
+            'https://images.unsplash.com/photo-1547235001-d703406d3f17?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxkZXNlcnQlMjBsYW5kc2NhcGV8ZW58MXx8fHwxNzY0Njk4ODU1fDA&ixlib=rb-4.1.0&q=80&w=1080',
+            'https://images.unsplash.com/photo-1514747975201-4715db583da9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxvY2VhbiUyMHdhdmVzfGVufDF8fHx8MTc2NDY0MjI3OHww&ixlib=rb-4.1.0&q=80&w=1080',
+            'https://images.unsplash.com/photo-1533130061792-64b345e4a833?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxtb3VudGFpbiUyMHBlYWt8ZW58MXx8fHwxNzY0NzA3NzcyfDA&ixlib=rb-4.1.0&q=80&w=1080',
+            'https://images.unsplash.com/photo-1487452066049-a710f7296400?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHx1cmJhbiUyMHN0cmVldHxlbnwxfHx8fDE3NjQ2NTA3NTV8MA&ixlib=rb-4.1.0&q=80&w=1080'
+        ];
+
+        const galleryContainer = document.getElementById('image-gallery-container');
+        let galleryHTML = '';
+
+        images.forEach((image, index) => {
+            galleryHTML += `
+                <div class="gallery-item aspect-square bg-neutral-100 rounded-lg overflow-hidden shadow-lg cursor-pointer">
+                    <img 
+                        src="${image}" 
+                        alt="Bild ${index + 1}"
+                        class="gallery-image w-full h-full object-cover"
+                        onerror="this.onerror=null; this.src='https://placehold.co/400x400/${(index % 2 === 0 ? 'adb886' : '4b3240')}/ffffff?text=Bild%20${index + 1}'"
+                    />
+                </div>
+            `;
+        });
+
+        galleryContainer.innerHTML = galleryHTML;
+    </script>
+</body>
+</html>
